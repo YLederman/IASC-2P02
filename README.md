@@ -1,2 +1,1 @@
-# IASC-2P02
-Repository for IASC 2P02 projects
+# IASC 2P02 - Ya'el Lederman
