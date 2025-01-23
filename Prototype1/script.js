@@ -49,7 +49,6 @@ const animation = () =>
     const elapsedTime = clock.getElapsedTime()
 
     //Animate testSphere
-    console.log(Math.sin(elapsedTime))
     testSphere.position.y = Math.sin(elapsedTime)
 
     //Renderer
