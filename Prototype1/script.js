@@ -38,6 +38,13 @@ import * as THREE from "three"
 
  scene.add(testSphere)
 
+ //testOctahedron
+ const octahedronGeometry = new THREE.OctahedronGeometry(1)
+ const octahedronMaterial = new THREE.MeshNormalMaterial()
+ const testOctahedron = new THREE.Mesh(octahedronGeometry, octahedronMaterial)
+
+ scene.add(testOctahedron)
+
 /*********************
 ** Animation Loop **
 *********************/
@@ -50,6 +57,9 @@ const animation = () =>
 
     //Animate testSphere
     testSphere.position.y = Math.sin(elapsedTime)
+
+    //Animate testOctahedron
+    testOctahedron.position.x = Math.cos(elapsedTime)
 
     //Renderer
     renderer.render(scene, camera)
