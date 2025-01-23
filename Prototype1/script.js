@@ -31,19 +31,19 @@ import * as THREE from "three"
 /*************
 ** Meshes **
 *************/ 
- //testSphere
- const sphereGeometry = new THREE.SphereGeometry(1)
- const sphereMaterial = new THREE.MeshNormalMaterial()
- const testSphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
+ //testCube
+ const cubeGeomtery = new THREE.BoxGeometry(1)
+ const cubeMaterial = new THREE.MeshNormalMaterial()
+ const testCube = new THREE.Mesh(cubeGeomtery, cubeMaterial)
 
- scene.add(testSphere)
+ scene.add(testCube)
 
- //testOctahedron
- const octahedronGeometry = new THREE.OctahedronGeometry(1)
- const octahedronMaterial = new THREE.MeshNormalMaterial()
- const testOctahedron = new THREE.Mesh(octahedronGeometry, octahedronMaterial)
+ //testTorus
+ const torusGeometry = new THREE.TorusGeometry(2.5)
+ const torusMaterial = new THREE.MeshNormalMaterial()
+ const testTorus = new THREE.Mesh(torusGeometry, torusMaterial)
 
- scene.add(testOctahedron)
+ scene.add(testTorus)
 
 /*********************
 ** Animation Loop **
@@ -55,11 +55,21 @@ const animation = () =>
     //Return elapsedTime
     const elapsedTime = clock.getElapsedTime()
 
-    //Animate testSphere
-    testSphere.position.y = Math.sin(elapsedTime)
+    //Animate testCube
+    const cubeSpeed = 1
+    testCube.scale.x = Math.sin(elapsedTime)
+    testCube.scale.y = Math.sin(elapsedTime)
+    testCube.scale.z = Math.sin(elapsedTime)
 
-    //Animate testOctahedron
-    testOctahedron.position.x = Math.cos(elapsedTime)
+    testCube.rotation.x = elapsedTime * cubeSpeed
+    testCube.rotation.y = elapsedTime * cubeSpeed
+    testCube.rotation.z = elapsedTime * cubeSpeed
+
+    //Animate testTorus
+    const torusSpeed = 1
+    testTorus.rotation.x = elapsedTime * torusSpeed
+    testTorus.rotation.y = elapsedTime * torusSpeed
+    testTorus.rotation.z = elapsedTime * torusSpeed
 
     //Renderer
     renderer.render(scene, camera)
