@@ -76,7 +76,9 @@ import * as dat from "lil-gui"
  const uiObject = {
    speed: 1,
    distance: 1,
-   rotate: 1
+   rotate: 1,
+   scale: 1,
+   play: false
  }
 
  //testTorusKnot UI
@@ -102,6 +104,17 @@ import * as dat from "lil-gui"
    .step(0.1)
    .name('Rotation')
 
+   torusFolder
+   .add(uiObject, 'scale')
+   .min(0.1)
+   .max(10)
+   .step(0.1)
+   .name('Scale')
+
+   torusFolder
+   .add(uiObject, 'play')
+   .name('Animate')
+
  //testPlane UI
  const planeFolder = ui.addFolder('Plane')
  planeFolder
@@ -118,10 +131,20 @@ import * as dat from "lil-gui"
       const elapsedTime = clock.getElapsedTime()
 
       //Animate Sphere
-      testTorusKnot.position.y = Math.sin(elapsedTime * uiObject.speed) * uiObject.distance
-      testTorusKnot.rotation.x = elapsedTime * uiObject.rotate
-      testTorusKnot.rotation.y = elapsedTime * uiObject.rotate
-      testTorusKnot.rotation.z = elapsedTime * uiObject.rotate
+      testTorusKnot.scale.x = uiObject.scale
+      testTorusKnot.scale.y = uiObject.scale
+      testTorusKnot.scale.z = uiObject.scale
+
+      if(uiObject.play)
+      {
+        console.log("Animation plays")
+        testTorusKnot.position.x = Math.cos(elapsedTime * uiObject.speed) * uiObject.distance
+        testTorusKnot.position.z = Math.sin(elapsedTime * uiObject.speed) * uiObject.distance
+
+        //testTorusKnot.rotation.x = elapsedTime * uiObject.rotate
+        testTorusKnot.rotation.y = elapsedTime * uiObject.rotate
+        //testTorusKnot.rotation.z = elapsedTime * uiObject.rotate
+      }
 
       // Update OrbitControls
       controls.update()
