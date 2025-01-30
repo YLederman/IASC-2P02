@@ -21,7 +21,7 @@ import * as dat from "lil-gui"
 
  //Scene
  const scene = new THREE.Scene()
- scene.background = new THREE.Color('gray')
+ scene.background = new THREE.Color('lavender')
 
  //Camera
  const camera = new THREE.PerspectiveCamera(
@@ -48,16 +48,16 @@ import * as dat from "lil-gui"
 ** Meshes **
 *************/ 
  //testSphere
- const sphereGeometry = new THREE.SphereGeometry(1)
- const sphereMaterial = new THREE.MeshNormalMaterial()
- const testSphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
+ const torusKnotGeometry = new THREE.TorusKnotGeometry(1)
+ const torusKnotMaterial = new THREE.MeshNormalMaterial()
+ const testTorusKnot = new THREE.Mesh(torusKnotGeometry, torusKnotMaterial)
 
- scene.add(testSphere)
+ scene.add(testTorusKnot)
 
  //Plane
  const planeGeometry = new THREE.PlaneGeometry(10, 10, 50, 50)
  const planeMaterial = new THREE.MeshBasicMaterial({
-   color: new THREE.Color('white'),
+   color: new THREE.Color('black'),
    side: THREE.DoubleSide,
    wireframe: true
  })
@@ -75,24 +75,32 @@ import * as dat from "lil-gui"
  //UI Object
  const uiObject = {
    speed: 1,
-   distance: 1
+   distance: 1,
+   rotate: 1
  }
 
- //testSphere UI
- const sphereFolder = ui.addFolder('Sphere')
- sphereFolder
+ //testTorusKnot UI
+ const torusFolder = ui.addFolder('Torus Knot')
+ torusFolder
    .add(uiObject, 'speed')
    .min(0.1)
    .max(10)
    .step(0.1)
    .name('Speed')
 
-   sphereFolder
+   torusFolder
    .add(uiObject, 'distance')
    .min(0.1)
    .max(10)
    .step(0.1)
    .name('Distance')
+
+   torusFolder
+   .add(uiObject, 'rotate')
+   .min(0.1)
+   .max(10)
+   .step(0.1)
+   .name('Rotation')
 
  //testPlane UI
  const planeFolder = ui.addFolder('Plane')
@@ -110,7 +118,10 @@ import * as dat from "lil-gui"
       const elapsedTime = clock.getElapsedTime()
 
       //Animate Sphere
-      testSphere.position.y = Math.sin(elapsedTime * uiObject.speed) * uiObject.distance
+      testTorusKnot.position.y = Math.sin(elapsedTime * uiObject.speed) * uiObject.distance
+      testTorusKnot.rotation.x = elapsedTime * uiObject.rotate
+      testTorusKnot.rotation.y = elapsedTime * uiObject.rotate
+      testTorusKnot.rotation.z = elapsedTime * uiObject.rotate
 
       // Update OrbitControls
       controls.update()
