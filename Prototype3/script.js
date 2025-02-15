@@ -126,8 +126,8 @@ import * as dat from "lil-gui"
  scene.add(directionalLight)
 
  //Directional Light Helper
- const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
- scene.add(directionalLightHelper)
+ //const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
+ //scene.add(directionalLightHelper)
 
 /*******
 ** UI **
@@ -169,7 +169,7 @@ import * as dat from "lil-gui"
       torusKnot.rotation.y = elapsedTime
 
       //Helper
-      directionalLightHelper.update
+      //directionalLightHelper.update
 
       //Update OrbitControls
       controls.update()
