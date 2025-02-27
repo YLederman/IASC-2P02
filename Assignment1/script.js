@@ -107,24 +107,34 @@ import * as dat from "lil-gui"
 /*************
 ** Lights **
 *************/
-
  //const ambientLight = new THREE.AmbientLight(
    //new THREE.Color('white')
  //)
  //scene.add(ambientLight)
 
  //Directional Light
- const directionalLight = new THREE.DirectionalLight(
+ const oneDirectionalLight = new THREE.DirectionalLight(
    new THREE.Color('white'),
    0.5
  )
 
- directionalLight.position.set(20, 4.1, 0)
- directionalLight.target = cave
+ oneDirectionalLight.position.set(20, 4.1, -7)
+ oneDirectionalLight.target = cave
 
- directionalLight.castShadow = true
+ oneDirectionalLight.castShadow = false
+ scene.add(oneDirectionalLight)
 
- scene.add(directionalLight)
+ const twoDirectionalLight = new THREE.DirectionalLight(
+  new THREE.Color('white'),
+  0.5
+)
+
+ twoDirectionalLight.position.set(20, 4.1, 7)
+ twoDirectionalLight.target = cave
+
+ twoDirectionalLight.castShadow = false
+
+ scene.add(twoDirectionalLight)
 
  //Directional Light Helper
  //const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
@@ -141,6 +151,7 @@ import * as dat from "lil-gui"
   fourthChange: false
  }
 
+
  //Part one
  document.querySelector('#part-one').onclick = function() {
   domObject.part = 1
@@ -154,20 +165,22 @@ import * as dat from "lil-gui"
  //First change
  document.querySelector('#first-change').onclick = function() {
   domObject.firstChange = true
+  oneDirectionalLight.castShadow = true
  }
 
  //Second change
  document.querySelector('#second-change').onclick = function() {
   domObject.secondChange = true
+  oneDirectionalLight.castShadow = false
  }
 
  //Third change
-document.querySelector('#third-change').onclick = function() {
+ document.querySelector('#third-change').onclick = function() {
   domObject.thirdChange = true
  }
 
  //Fourth change
-document.querySelector('#fourth-change').onclick = function() {
+ document.querySelector('#fourth-change').onclick = function() {
   domObject.fourthChange = true
  }
 
@@ -214,7 +227,7 @@ document.querySelector('#fourth-change').onclick = function() {
       //part one
       if(domObject.part === 1)
       {
-        camera.position.set(6, 0, 0)
+        camera.position.set(10, 0, 0)
         camera.lookAt(0, 0, 0)
       }
 
@@ -228,11 +241,15 @@ document.querySelector('#fourth-change').onclick = function() {
       //first change
       if(domObject.firstChange)
       {
+        //oneDirectionalLight.castShadow = true
+        //twoDirectionalLight.castShadow = false
       }
 
       //second change
       if(domObject.secondChange)
       {
+        //oneDirectionalLight.castShadow = false
+        //twoDirectionalLight.castShadow = true
       }
 
       //third change
