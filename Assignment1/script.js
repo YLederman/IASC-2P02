@@ -118,7 +118,7 @@ import * as dat from "lil-gui"
    0.5
  )
 
- oneDirectionalLight.position.set(20, 4.1, -7)
+ oneDirectionalLight.position.set(35, 5, -7)
  oneDirectionalLight.target = cave
 
  oneDirectionalLight.castShadow = false
@@ -129,7 +129,7 @@ import * as dat from "lil-gui"
   0.5
 )
 
- twoDirectionalLight.position.set(20, 4.1, 7)
+ twoDirectionalLight.position.set(35, 5, 7)
  twoDirectionalLight.target = cave
 
  twoDirectionalLight.castShadow = false
@@ -155,6 +155,8 @@ import * as dat from "lil-gui"
  //Part one
  document.querySelector('#part-one').onclick = function() {
   domObject.part = 1
+  oneDirectionalLight.castShadow = false
+  twoDirectionalLight.castShadow = false
  }
 
  //Part two
@@ -166,12 +168,14 @@ import * as dat from "lil-gui"
  document.querySelector('#first-change').onclick = function() {
   domObject.firstChange = true
   oneDirectionalLight.castShadow = true
+  twoDirectionalLight.castShadow = false
  }
 
  //Second change
  document.querySelector('#second-change').onclick = function() {
   domObject.secondChange = true
   oneDirectionalLight.castShadow = false
+  twoDirectionalLight.castShadow = true
  }
 
  //Third change
