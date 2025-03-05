@@ -12,6 +12,19 @@ import * as dat from "lil-gui"
    aspectRatio:window.innerWidth / window.innerHeight
  }
 
+ // Resizing
+ window.addEventListener('resize', () => {
+   sizes.width = window.innerWidth
+   sizes.height = window.innerHeight
+   sizes.aspectRatio = window.innerWidth / window.innerHeight
+
+   camera.aspect = sizes.aspectRatio
+   camera.updateProjectionMatrix()
+
+   renderer.setSize(sizes.width, sizes.height)
+   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+ })
+
 /************
  ** SCENE **
  ************/
