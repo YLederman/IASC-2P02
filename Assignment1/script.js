@@ -148,7 +148,8 @@ import * as dat from "lil-gui"
   firstChange: false,
   secondChange: false,
   thirdChange: false,
-  fourthChange: false
+  fourthChange: false,
+  fifthChange: false
  }
 
 
@@ -186,6 +187,11 @@ import * as dat from "lil-gui"
  //Fourth change
  document.querySelector('#fourth-change').onclick = function() {
   domObject.fourthChange = true
+ }
+
+ //Fifth change
+ document.querySelector('#fifth-change').onclick = function() {
+  domObject.fifthChange = true
  }
 
 /*******
@@ -263,6 +269,11 @@ import * as dat from "lil-gui"
 
       //fourth change
       if(domObject.fourthChange)
+      {
+      }
+
+      //fifth change
+      if(domObject.fifthChange)
       {
       }
 
