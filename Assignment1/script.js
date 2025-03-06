@@ -63,46 +63,101 @@ import * as dat from "lil-gui"
  scene.add(cave)
 
  //Objects
- const torusKnotGeometry = new THREE.TorusKnotGeometry(0.5, 0.2)
- const torusKnotMaterial = new THREE.MeshNormalMaterial()
- const torusKnot = new THREE.Mesh(torusKnotGeometry, torusKnotMaterial)
-
- torusKnot.position.set(15, 1.5, 0)
-
- torusKnot.castShadow = true
-
- scene.add(torusKnot)
-
- const eyeOneGeometry = new THREE.SphereGeometry() 
- const eyeOneMaterial = new THREE.MeshNormalMaterial() 
- const eyeOne = new THREE.Mesh(eyeOneGeometry, eyeOneMaterial)
-
- eyeOne.position.set(15, 3, 4)
-
- eyeOne.castShadow = true
- 
- scene.add(eyeOne)
-
- const eyeTwoGeometry = new THREE.SphereGeometry() 
- const eyeTwoMaterial = new THREE.MeshNormalMaterial() 
- const eyeTwo = new THREE.Mesh(eyeTwoGeometry, eyeTwoMaterial)
-
- eyeTwo.position.set(15, 3, -4)
-
- eyeTwo.castShadow = true
- 
- scene.add(eyeTwo)
-
- const smileGeometry = new THREE.CapsuleGeometry(0.5, 4, 20, 20) 
+ const smileGeometry = new THREE.CapsuleGeometry(0.7, 7, 20, 20) 
  const smileMaterial = new THREE.MeshNormalMaterial()
  const smile = new THREE.Mesh(smileGeometry, smileMaterial)
 
- smile.position.set(15, -1, 0)
+ smile.position.set(13, 1, 0)
  smile.rotation.x = Math.PI * 0.5
 
  smile.castShadow = true
  
  scene.add(smile)
+
+ //Cat
+ const earGeometry = new THREE.ConeGeometry(0.7, 0.7, 32)
+ const earMaterial = new THREE.MeshNormalMaterial()
+ const ear = new THREE.Mesh(earGeometry, earMaterial)
+
+ ear.position.set(13, 3, -4.4)
+
+ ear.castShadow = true
+
+ scene.add(ear)
+
+ const eyeTwoGeometry = new THREE.SphereGeometry() 
+ const eyeTwoMaterial = new THREE.MeshNormalMaterial() 
+ const eyeTwo = new THREE.Mesh(eyeTwoGeometry, eyeTwoMaterial)
+
+ eyeTwo.position.set(13, 2, -4.5)
+
+ eyeTwo.castShadow = true
+ 
+ scene.add(eyeTwo)
+
+ const noseGeometry = new THREE.SphereGeometry(0.5) 
+ const noseMaterial = new THREE.MeshNormalMaterial() 
+ const nose = new THREE.Mesh(noseGeometry, noseMaterial)
+
+ nose.position.set(13, 2, -5.2)
+
+ nose.castShadow = true
+ 
+ scene.add(nose)
+
+ const legOneGeometry = new THREE.CapsuleGeometry(0.5, 1, 20, 20) 
+ const legOneMaterial = new THREE.MeshNormalMaterial()
+ const legOne = new THREE.Mesh(legOneGeometry, legOneMaterial)
+
+ legOne.position.set(13, -0.25, -3.5)
+
+ legOne.castShadow = true
+ 
+ scene.add(legOne)
+
+ const legTwoGeometry = new THREE.CapsuleGeometry(0.5, 1, 20, 20) 
+ const legTwoMaterial = new THREE.MeshNormalMaterial()
+ const legTwo = new THREE.Mesh(legTwoGeometry, legTwoMaterial)
+
+ legTwo.position.set(13, -0.25, 1)
+
+ legTwo.castShadow = true
+ 
+ scene.add(legTwo)
+
+ const tailGeometry = new THREE.CapsuleGeometry(0.5, 1.3, 20, 20) 
+ const tailMaterial = new THREE.MeshNormalMaterial()
+ const tail = new THREE.Mesh(tailGeometry, tailMaterial)
+
+ tail.position.set(13, 2, 0.5)
+ tail.rotation.x = Math.PI * 0.7
+
+ tail.castShadow = true
+ 
+ scene.add(tail)
+
+ //Gun
+ const pointOneGeometry = new THREE.CapsuleGeometry(0.7, 3, 20, 20) 
+ const pointOneMaterial = new THREE.MeshNormalMaterial()
+ const pointOne = new THREE.Mesh(pointOneGeometry, pointOneMaterial)
+
+ pointOne.position.set(13, 1, 4)
+ pointOne.rotation.x = Math.PI * 0.5
+
+ pointOne.castShadow = true
+ 
+ scene.add(pointOne)
+
+ const tOneGeometry = new THREE.CapsuleGeometry(0.2, 0.5, 20, 20) 
+ const tOneMaterial = new THREE.MeshNormalMaterial()
+ const tOne = new THREE.Mesh(tOneGeometry, tOneMaterial)
+
+ tOne.position.set(13, 0, 2)
+
+ tOne.castShadow = true
+ 
+ scene.add(tOne)
+ 
 
 /*************
 ** Lights **
@@ -118,7 +173,7 @@ import * as dat from "lil-gui"
    0.5
  )
 
- oneDirectionalLight.position.set(35, 5, -7)
+ oneDirectionalLight.position.set(35, 5, -10)
  oneDirectionalLight.target = cave
 
  oneDirectionalLight.castShadow = false
@@ -129,12 +184,24 @@ import * as dat from "lil-gui"
   0.5
 )
 
- twoDirectionalLight.position.set(35, 5, 7)
+ twoDirectionalLight.position.set(35, 5, 10)
  twoDirectionalLight.target = cave
 
  twoDirectionalLight.castShadow = false
 
  scene.add(twoDirectionalLight)
+
+ const threeDirectionalLight = new THREE.DirectionalLight(
+  new THREE.Color('white'),
+  0.5
+)
+
+ threeDirectionalLight.position.set(35, 3, 0)
+ threeDirectionalLight.target = cave
+
+ threeDirectionalLight.castShadow = false
+
+ scene.add(threeDirectionalLight)
 
  //Directional Light Helper
  //const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
@@ -158,6 +225,7 @@ import * as dat from "lil-gui"
   domObject.part = 1
   oneDirectionalLight.castShadow = false
   twoDirectionalLight.castShadow = false
+  threeDirectionalLight.castShadow = false
  }
 
  //Part two
@@ -170,6 +238,7 @@ import * as dat from "lil-gui"
   domObject.firstChange = true
   oneDirectionalLight.castShadow = true
   twoDirectionalLight.castShadow = false
+  threeDirectionalLight.castShadow = false
  }
 
  //Second change
@@ -177,21 +246,31 @@ import * as dat from "lil-gui"
   domObject.secondChange = true
   oneDirectionalLight.castShadow = false
   twoDirectionalLight.castShadow = true
+  threeDirectionalLight.castShadow = false
  }
 
  //Third change
  document.querySelector('#third-change').onclick = function() {
   domObject.thirdChange = true
+  oneDirectionalLight.castShadow = false
+  twoDirectionalLight.castShadow = false
+  threeDirectionalLight.castShadow = true
  }
 
  //Fourth change
  document.querySelector('#fourth-change').onclick = function() {
   domObject.fourthChange = true
+  oneDirectionalLight.castShadow = false
+  twoDirectionalLight.castShadow = false
+  threeDirectionalLight.castShadow = true
  }
 
  //Fifth change
  document.querySelector('#fifth-change').onclick = function() {
   domObject.fifthChange = true
+  oneDirectionalLight.castShadow = false
+  twoDirectionalLight.castShadow = false
+  threeDirectionalLight.castShadow = true
  }
 
 /*******
@@ -244,7 +323,7 @@ import * as dat from "lil-gui"
       //part two
       if(domObject.part === 2)
       {
-        camera.position.set(25, 1, 0)
+        camera.position.set(27, 1, 0)
         camera.lookAt(0, 0, 0)
       }
 
@@ -265,16 +344,19 @@ import * as dat from "lil-gui"
       //third change
       if(domObject.thirdChange)
       {
+        threeDirectionalLight.position.z = Math.cos(elapsedTime) * 7
       }
 
       //fourth change
       if(domObject.fourthChange)
       {
+        threeDirectionalLight.position.set(13, 3, 0)
       }
 
       //fifth change
       if(domObject.fifthChange)
       {
+        threeDirectionalLight.position.set(200, 3, 0)
       }
 
       //Helper
