@@ -34,7 +34,7 @@ import * as dat from "lil-gui"
 
  //Scene
  const scene = new THREE.Scene()
- scene.background = new THREE.Color('gray')
+ scene.background = new THREE.Color('black')
 
  //Camera
  const camera = new THREE.PerspectiveCamera(
@@ -44,7 +44,7 @@ import * as dat from "lil-gui"
     100
  )
  scene.add(camera)
- camera.position.set(0, 12, -20)
+ camera.position.set(10, 0, 20)
 
  //Renderer
  const renderer = new THREE.WebGLRenderer({
@@ -128,29 +128,29 @@ import * as dat from "lil-gui"
    },
    term1: {
     group: group1,
-    term: '',
-    color: '',
+    term: 'katniss',
+    color: '#0b6b34',
     randomized: true,
-    diameter: 1,
-    scale: 1,
+    diameter: 10,
+    scale: 0.5,
     nCubes: 100
    },
    term2: {
     group: group2,
-    term: '',
-    color: '',
+    term: 'capitol',
+    color: '#f505c9',
     randomized: true,
-    diameter: 1,
-    scale: 1,
+    diameter: 10,
+    scale: 0.5,
     nCubes: 100
    },
    term3: {
     group: group3,
-    term: '',
-    color: '',
+    term: 'snow',
+    color: '#ff0000',
     randomized: true,
-    diameter: 1,
-    scale: 1,
+    diameter: 10,
+    scale: 0.5,
     nCubes: 100
    },
    saveTerms() {
