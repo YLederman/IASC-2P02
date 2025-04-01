@@ -44,7 +44,7 @@ import * as dat from "lil-gui"
     100
  )
  scene.add(camera)
- camera.position.set(10, 0, 20)
+ camera.position.set(20, 2, 25)
 
  //Renderer
  const renderer = new THREE.WebGLRenderer({
@@ -101,8 +101,63 @@ import * as dat from "lil-gui"
    params.group.add(cube)
  }
 
- //drawCube(0, 'purple')
- //drawCube(4, 'red')
+  const drawTorus = (height, params) => 
+  {
+  const torusGeo = new THREE.TorusKnotGeometry(2.5, 0.5, 44)
+  const torusMat = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(params.color),
+      transparent: true,
+      opacity: 1.0,
+  })
+
+  //create sphere
+  const torusKnot = new THREE.Mesh(torusGeo, torusMat)
+
+  //scale sphere
+  torusKnot.scale.x = params.scale
+  torusKnot.scale.y = params.scale
+  torusKnot.scale.z = params.scale
+
+  //position sphere
+  torusKnot.position.x = (Math.random() - 0.5) * params.diameter
+  torusKnot.position.z = (Math.random() - 0.5) * params.diameter
+  torusKnot.position.y = height - 10
+
+  params.group.add(torusKnot)
+  }
+
+  const drawCone = (height, params) => 
+    {
+    const coneGeo = new THREE.ConeGeometry(0.5, 0.8, 3)
+    const coneMat = new THREE.MeshStandardMaterial({ 
+        color: new THREE.Color(params.color), 
+        transparent: true, 
+        opacity: 1.0 
+    })
+
+//create cone
+const cone = new THREE.Mesh(coneGeo, coneMat)
+
+//scale cone
+cone.scale.x = params.scale
+cone.scale.y = params.scale
+cone.scale.z = params.scale
+
+//position cone
+cone.position.x = (Math.random() - 0.5) * params.diameter
+cone.position.z = (Math.random() - 0.5) * params.diameter
+cone.position.y = height - 10
+
+//randomize cone rotation
+if(params.randomized)
+    {
+        cone.rotation.x = Math.random() * 2 * Math.PI
+        cone.rotation.z = Math.random() * 2 * Math.PI
+        cone.rotation.y = Math.random() * 2 * Math.PI
+    }
+
+    params.group.add(cone);
+}
 
 /*******
 ** UI **
@@ -131,27 +186,27 @@ import * as dat from "lil-gui"
     term: 'katniss',
     color: '#0b6b34',
     randomized: true,
-    diameter: 10,
-    scale: 0.5,
-    nCubes: 100
+    diameter: 15,
+    scale: 1,
+    nCubes: 50
    },
    term2: {
     group: group2,
     term: 'capitol',
     color: '#f505c9',
     randomized: true,
-    diameter: 10,
-    scale: 0.5,
-    nCubes: 100
+    diameter: 25,
+    scale: 0.1,
+    nCubes: 125
    },
    term3: {
     group: group3,
     term: 'snow',
     color: '#ff0000',
-    randomized: true,
+    randomized: false,
     diameter: 10,
-    scale: 0.5,
-    nCubes: 100
+    scale: 1,
+    nCubes: 350
    },
    saveTerms() {
       saveTerms()
@@ -265,25 +320,38 @@ import * as dat from "lil-gui"
    tokenizedText = parsedText.split(/[^\w']+/)
  }
 
- //Find searchTerm in tokenizedText
- const findSearchTermInTokenizedText = (params) => 
-   {
-   //Use a for loop to go through the array
-   for (let i = 0; i < tokenizedText.length; i++)
+ //find searchTerm in tokenizedText
+const findSearchTermInTokenizedText = (params) =>
+  {  
+      //for loop to go through the tokenizedText array
+      for (let i = 0; i < tokenizedText.length; i++)
       {
-         //If text matches search term, draw a cube
-         if(tokenizedText[i] === params.term){
-            //Convert i into height, a value between 0 and 20
-            const height = (100 / tokenizedText.length) * i * 0.2
-   
-            //Call drawCube x 100 using converted height
-            for(let a = 0; a < params.nCubes; a++)
-            {
-               drawCube(height, params)
-            }
-         }
+          //if tokenizedText[i] matches our searchTerm, draw a cube
+          if(tokenizedText[i] === params.term){
+  
+              //convert i into height, with a value between 0 and 20, so that visualization doesn't extend infinitely
+              const height = (100 / tokenizedText.length) * i * 0.2
+  
+              //call drawCube function 100 times using converted height value
+              for(let a = 0; a < params.nCubes; a++)
+              {
+                  if (params.term === "katniss") 
+                  {
+                      drawCone(height, params);
+                  } 
+                  else if (params.term === "capitol") 
+                  {
+                      drawTorus(height, params);
+                  } 
+                  else if (params.term === "snow") 
+                  {
+                      drawCube(height, params)
+                  }
+                  //drawCube(height, params)
+              }   
       }
- }
+  }
+  }
 
 /*********************
 ** Animation Loop **
@@ -303,8 +371,8 @@ import * as dat from "lil-gui"
       {
         camera.position.x = Math.sin(elapsedTime * 0.1) * 20
         camera.position.z = Math.cos(elapsedTime * 0.1) * 20
-        camera.position.y = 5
-        camera.lookAt(0, 0, 0)
+        camera.position.y = 13
+        camera.lookAt(-1, -3, -1)
       }
 
       //Renderer
