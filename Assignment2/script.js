@@ -195,9 +195,9 @@ if(params.randomized)
     term: 'capitol',
     color: '#f505c9',
     randomized: true,
-    diameter: 25,
+    diameter: 35,
     scale: 0.1,
-    nCubes: 125
+    nCubes: 50
    },
    term3: {
     group: group3,
