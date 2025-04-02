@@ -192,7 +192,7 @@ if(params.randomized)
    },
    term2: {
     group: group2,
-    term: 'capitol',
+    term: 'peeta',
     color: '#f505c9',
     randomized: true,
     diameter: 25,
@@ -339,7 +339,7 @@ const findSearchTermInTokenizedText = (params) =>
                   {
                       drawCone(height, params);
                   } 
-                  else if (params.term === "capitol") 
+                  else if (params.term === "peeta") 
                   {
                       drawTorus(height, params);
                   } 
