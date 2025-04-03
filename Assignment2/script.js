@@ -44,7 +44,7 @@ import * as dat from "lil-gui"
     100
  )
  scene.add(camera)
- camera.position.set(20, 2, 25)
+ camera.position.set(25, 2, 30)
 
  //Renderer
  const renderer = new THREE.WebGLRenderer({
@@ -83,12 +83,12 @@ import * as dat from "lil-gui"
    //Position cube
    cube.position.y = height - 10
    cube.position.x = (Math.random() - 0.5) * params.diameter
-   cube.position.z = (Math.random() - 0.5) * params.diameter
+   cube.position.z = (Math.random() - 0.5) * params.diameter 
 
    //Scale cubes
-   cube.scale.x = params.scale
-   cube.scale.y = params.scale
-   cube.scale.z = params.scale
+   cube.scale.x = params.scale / (height / 1.75)
+   cube.scale.y = params.scale / (height / 1.75)
+   cube.scale.z = params.scale / (height / 1.75)
 
    //Randomize rotation
    if(params.randomized){
@@ -103,9 +103,10 @@ import * as dat from "lil-gui"
 
   const drawTorus = (height, params) => 
   {
-  const torusGeo = new THREE.TorusKnotGeometry(2.5, 0.5, 44)
-  const torusMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color(params.color),
+  const torusGeo = new THREE.TorusKnotGeometry(1.5, 1, 44)
+  const torusMat = new THREE.MeshLambertMaterial({
+      emissive: new THREE.Color(params.color),
+      emissiveIntensity: 0.35,
       transparent: true,
       opacity: 1.0,
   })
@@ -144,8 +145,8 @@ cone.scale.y = params.scale
 cone.scale.z = params.scale
 
 //position cone
-cone.position.x = (Math.random() - 0.5) * params.diameter
-cone.position.z = (Math.random() - 0.5) * params.diameter
+cone.position.x = (Math.random() - 0.5) * params.diameter * height
+cone.position.z = (Math.random() - 0.5) * params.diameter * height
 cone.position.y = height - 10
 
 //randomize cone rotation
@@ -185,8 +186,9 @@ if(params.randomized)
     group: group1,
     term: 'katniss',
     color: '#0b6b34',
+    emissive: false,
     randomized: true,
-    diameter: 15,
+    diameter: 2,
     scale: 1,
     nCubes: 50
    },
@@ -194,6 +196,7 @@ if(params.randomized)
     group: group2,
     term: 'capitol',
     color: '#f505c9',
+    emissive: true,
     randomized: true,
     diameter: 35,
     scale: 0.1,
@@ -203,9 +206,10 @@ if(params.randomized)
     group: group3,
     term: 'snow',
     color: '#ff0000',
+    emissive: false,
     randomized: false,
     diameter: 10,
-    scale: 1,
+    scale: 5,
     nCubes: 350
    },
    saveTerms() {
@@ -366,13 +370,18 @@ const findSearchTermInTokenizedText = (params) =>
       // Update OrbitControls
       controls.update()
 
+      //Capitol term spinning
+      group2.rotation.y = elapsedTime * 0.2
+
       //Rotate Camera
       if(uiObj.rotateCamera)
       {
         camera.position.x = Math.sin(elapsedTime * 0.1) * 20
-        camera.position.z = Math.cos(elapsedTime * 0.1) * 20
-        camera.position.y = 13
-        camera.lookAt(-1, -3, -1)
+        camera.position.z = Math.cos(elapsedTime * 0.1) * 45
+        camera.position.y = 0
+        camera.lookAt(0, 2, 0)
+        //camera.position.set(20, 2, 25)
+
       }
 
       //Renderer
